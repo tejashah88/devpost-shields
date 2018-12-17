@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     hasError() {
-      return this.svgSrc.startsWith('<p>') || (this.projectName && this.projectId && this.badgeType && this.badgeStyle);
+      return this.svgSrc.startsWith('<p>') || !(this.projectName && this.projectId && this.badgeType && this.badgeStyle);
     },
     composedMarkdown() {
       const badgeParams = `name=${this.projectName}&id=${this.projectId}&type=${this.badgeType}&style=${this.badgeStyle}`;
