@@ -1,0 +1,94 @@
+{
+  "name": "shield-generator",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "https://github.com/tejashah88/devpost-shields",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "deploy": "node ./node_modules/vue-gh-pages/index.js -b gh-pages"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "buefy": "^0.7.1",
+    "get-html-title": "0.0.2",
+    "is-url": "^1.2.4",
+    "vue": "^2.5.17",
+    "vue-clipboard2": "^0.2.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.2.0",
+    "@vue/cli-plugin-eslint": "^3.2.1",
+    "@vue/cli-service": "^3.2.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0-0",
+    "glob-all": "^3.1.0",
+    "node-sass": "^4.11.0",
+    "path": "^0.12.7",
+    "purgecss-webpack-plugin": "^1.4.0",
+    "sass-loader": "^7.1.0",
+    "vue-gh-pages": "^1.19.0",
+    "vue-template-compiler": "^2.5.17"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {
+      "require-await": "error",
+      "indent": [
+        "error",
+        2,
+        {
+          "SwitchCase": 1
+        }
+      ],
+      "quotes": [
+        "error",
+        "single",
+        {
+          "avoidEscape": true,
+          "allowTemplateLiterals": true
+        }
+      ],
+      "semi": [
+        "error",
+        "always"
+      ],
+      "no-console": "off",
+      "no-unused-vars": "warn",
+      "prefer-const": [
+        "warn",
+        {
+          "destructuring": "any",
+          "ignoreReadBeforeAssign": false
+        }
+      ],
+      "strict": [
+        "error",
+        "global"
+      ],
+      "no-var": "error"
+    },
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}

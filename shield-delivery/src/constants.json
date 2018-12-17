@@ -1,0 +1,27 @@
+{
+  "CACHE_MAX_AGE": 31536000000,
+  "LOGO_FILES": {
+    "SMALL": "./assets/devpost-small-logo-shrunk.png",
+    "BIG": "./assets/devpost-big-logo-shrunk.png"
+  },
+  "DEVPOST_THEME": {
+    "PRIMARY": "#003E54",
+    "SECONDARY": "#3ACCE6"
+  },
+  "BADGE_TYPES": [
+    "basic",
+    "custom-color",
+    "small-logo-left-text-none",
+    "small-logo-left-text-blend",
+    "small-logo-left-text-full",
+    "big-logo"
+  ],
+  "BADGE_STYLES": [
+    "plastic",
+    "flat",
+    "flat-square",
+    "for-the-badge",
+    "popout",
+    "popout-square"
+  ]
+}

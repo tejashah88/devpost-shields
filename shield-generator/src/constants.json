@@ -1,0 +1,20 @@
+{
+  "BASE_URL": "https://badges.devpost-shields.com",
+  "PROJECT_BASE_URL": "https://devpost.com/software/",
+  "BADGE_TYPES": [
+    { "internal": "basic", "readable": "Basic"},
+    { "internal": "custom-color", "readable": "Custom Colors"},
+    { "internal": "small-logo-left-text-none", "readable": "Logo & No Text"},
+    { "internal": "small-logo-left-text-blend", "readable": "Logo & Blended Text"},
+    { "internal": "small-logo-left-text-full", "readable": "Logo & Full Text"},
+    { "internal": "big-logo", "readable": "Big Logo"}
+  ],
+  "BADGE_STYLES": [
+    { "internal": "plastic", "readable": "Plastic"},
+    { "internal": "flat", "readable": "Flat"},
+    { "internal": "flat-square", "readable": "Flat (Square)"},
+    { "internal": "for-the-badge", "readable": "'For The Badge'"},
+    { "internal": "popout", "readable": "Popout"},
+    { "internal": "popout-square", "readable": "Popout (Square)"}
+  ]
+}
