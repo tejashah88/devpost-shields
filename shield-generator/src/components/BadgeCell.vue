@@ -62,7 +62,7 @@ export default {
       return this.svgSrc.startsWith('<p>') || !(this.projectName && this.projectId && this.badgeType && this.badgeStyle);
     },
     composedMarkdown() {
-      const badgeParams = `name=${this.projectName}&id=${this.projectId}&type=${this.badgeType}&style=${this.badgeStyle}`;
+      const badgeParams = `name=${encodeURIComponent(this.projectName)}&id=${this.projectId}&type=${this.badgeType}&style=${this.badgeStyle}`;
       const badgeImgUrl = `${BASE_URL}/get-badge?${badgeParams}`;
       const badgeLink = PROJECT_BASE_URL + this.projectId;
       const badgeAltText = `Devpost | ${this.projectName}`;
