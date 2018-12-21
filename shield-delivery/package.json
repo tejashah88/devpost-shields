@@ -13,6 +13,7 @@
   "author": "Tejas Shah <tejashah88@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@puresec/function-shield": "^1.2.2",
     "gh-badges": "^2.1.0",
     "lambda-api": "^0.9.2"
   },

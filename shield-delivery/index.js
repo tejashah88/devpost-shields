@@ -5,6 +5,17 @@ const api = require('lambda-api')();
 const generateBadge = require('./src/gen-badge');
 const { CACHE_MAX_AGE, BADGE_TYPES, BADGE_STYLES } = require('./src/constants.json');
 
+const FunctionShield = require('@puresec/function-shield');
+FunctionShield.configure({
+  policy: {
+    outbound_connectivity: 'allow',
+    read_write_tmp: 'block',
+    create_child_process: 'block',
+    read_handler: 'block'
+  },
+  token: process.env.FUNCTION_SHIELD_TOKEN
+});
+
 api.use((req, res, next) => {
   res.cors();
   next();

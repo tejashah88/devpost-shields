@@ -25,6 +25,8 @@ functions:
     timeout: 5 # optional, in seconds, default is 6
     reservedConcurrency: 10
     description: A serverless function that serves individual badges for use in GitHub repos.
+    environment:
+      FUNCTION_SHIELD_TOKEN: ${ssm:puresecToken}
     tags:
       project: devpost-badge-gen
 
