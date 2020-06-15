@@ -77,7 +77,7 @@ export default {
         // Test if it's a valid projecct link and fetch the project name...
         // We can't retrieve from Devpost directly due to CORS only allowing same origin policy
         // so we use the AllOrigins to fetch the page for us
-        const finalLink = `https://api.allorigins.ml/get?url=${link}`;
+        const finalLink = `https://api.allorigins.win/get?url=${link}`;
         let projectName, projectId;
 
         const { data: devpostPage } = await axios(finalLink);

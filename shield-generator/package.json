@@ -10,24 +10,24 @@
     "deploy": "node ./node_modules/vue-gh-pages/index.js -b gh-pages"
   },
   "dependencies": {
-    "axios": "^0.18.0",
-    "buefy": "^0.7.1",
+    "axios": "^0.19.2",
+    "buefy": "^0.8.20",
     "get-html-title": "0.0.2",
     "is-url": "^1.2.4",
-    "vue": "^2.5.17",
-    "vue-clipboard2": "^0.2.1"
+    "vue": "^2.6.11",
+    "vue-clipboard2": "^0.3.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.2.0",
-    "@vue/cli-plugin-eslint": "^3.2.1",
-    "@vue/cli-service": "^3.2.0",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0-0",
-    "node-sass": "^4.11.0",
-    "sass-loader": "^7.1.0",
-    "vue-gh-pages": "^1.19.0",
-    "vue-template-compiler": "^2.5.17"
+    "@vue/cli-plugin-babel": "^4.4.4",
+    "@vue/cli-plugin-eslint": "^4.4.4",
+    "@vue/cli-service": "^4.4.4",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.2.0",
+    "eslint-plugin-vue": "^6.2.2",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^8.0.2",
+    "vue-gh-pages": "^1.19.1",
+    "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
     "root": true,
