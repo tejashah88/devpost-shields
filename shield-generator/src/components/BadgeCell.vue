@@ -1,34 +1,10 @@
-<template>
-  <div class="badge-cell">
-    <span style="line-height: 0px" v-html="svgSrc"/>
-    <div style="padding-left: 10px"></div>
-    <b-tooltip
-      :label="copyStatus"
-      type="is-dark"
-      position="is-top"
-      :active="tooltipActive"
-      animated>
-      <button
-        v-show="!hasError"
-        v-clipboard:copy="composedMarkdown"
-        v-clipboard:success="onCopySuccess"
-        v-clipboard:error="onCopyError"
-        class="button is-small"
-        @mouseleave="hideTooltip">
-        <span class="icon">
-          <i class="mdi mdi-24px mdi-clipboard-text"></i>
-        </span>
-      </button>
-    </b-tooltip>
-  </div>
-</template>
+<script setup lang="ts">
+  import { useClipboard } from '@vueuse/core';
+  import { ref, computed, type Ref } from 'vue';
+  import { BASE_URL, PROJECT_BASE_URL } from '@/constants.json';
 
-<script>
-import { BASE_URL, PROJECT_BASE_URL } from '@/constants.json';
-
-export default {
-  name: 'BadgeCell',
-  props: {
+  // Input Properties
+  const props = defineProps({
     projectName: {
       type: String,
       default: ''
@@ -49,49 +25,80 @@ export default {
       type: String,
       default: '<p>Unknown</p>'
     }
-  },
-  data() {
-    return {
-      copyStatus: 'Unknown',
-      tooltipActive: false,
-      timeoutObj: null
-    };
-  },
-  computed: {
-    hasError() {
-      return this.svgSrc.startsWith('<p>') || !(this.projectName && this.projectId && this.badgeType && this.badgeStyle);
-    },
-    composedMarkdown() {
-      const badgeParams = `name=${encodeURIComponent(this.projectName)}&id=${this.projectId}&type=${this.badgeType}&style=${this.badgeStyle}`;
-      const badgeImgUrl = `${BASE_URL}/get-badge?${badgeParams}`;
-      const badgeLink = PROJECT_BASE_URL + this.projectId;
-      const badgeAltText = `Devpost | ${this.projectName}`;
-      return `[![${badgeAltText}](${badgeImgUrl})](${badgeLink})`;
-    }
-  },
-  methods: {
-    onCopySuccess() {
-      this.copyStatus = 'Copied!';
-      this.showTooltipTemporarily(3000);
-    },
-    onCopyError() {
-      this.copyStatus = 'Failed to copy!';
-      this.showTooltipTemporarily(3000);
-    },
-    showTooltipTemporarily(timeout) {
-      this.tooltipActive = true;
-      this.timeoutObj = setTimeout(() => this.tooltipActive = false, timeout);
-    },
-    hideTooltip() {
-      this.tooltipActive = false;
-      if (this.timeoutObj)
-        clearTimeout(this.timeoutObj);
+  });
+
+  // Data
+  const copyStatus: Ref<string, string> = ref('Unknown');
+  const tooltipActive: Ref<boolean, boolean> = ref(false);
+  const timeoutObj: Ref<ReturnType<typeof setTimeout> | null, ReturnType<typeof setTimeout> | null> = ref(null);
+
+  // Computed
+  const hasError = computed(() => {
+    return props.svgSrc.startsWith('<p>') || !(props.projectName && props.projectId && props.badgeType && props.badgeStyle);
+  });
+
+  const composedMarkdown = computed(() => {
+    const badgeParams = `name=${encodeURIComponent(props.projectName)}&id=${props.projectId}&type=${props.badgeType}&style=${props.badgeStyle}`;
+    const badgeImgUrl = `${BASE_URL}/get-badge?${badgeParams}`;
+    const badgeLink = PROJECT_BASE_URL + props.projectId;
+    const badgeAltText = `Devpost | ${props.projectName}`;
+    return `[![${badgeAltText}](${badgeImgUrl})](${badgeLink})`;
+  });
+
+  const { /* text,  */copy, /* copied, isSupported */ } = useClipboard({ source: composedMarkdown });
+
+
+  // Methods
+  async function onCopyRequest() {
+    await copy(composedMarkdown.value);
+    copyStatus.value = 'Copied!';
+    showTooltipTemporarily(3000);
+  }
+
+  function showTooltipTemporarily(timeout: number) {
+    tooltipActive.value = true;
+    timeoutObj.value = setTimeout(() => {
+      tooltipActive.value = false;
+      timeoutObj.value = null;
+    }, timeout);
+  }
+
+  function hideTooltip() {
+    tooltipActive.value = false;
+    if (timeoutObj.value) {
+      clearTimeout(timeoutObj.value);
+      timeoutObj.value = null;
     }
   }
-};
 </script>
 
-<style lang="scss">
+<template>
+  <div class="badge-cell">
+    <span style="line-height: 0px" v-html="svgSrc"/>
+    <div style="padding-left: 10px"></div>
+    <b-tooltip
+      :label="copyStatus"
+      type="is-dark"
+      position="is-top"
+      :active="tooltipActive"
+      animated
+    >
+      <b-button
+        class="button is-small"
+        :disabled="hasError"
+        @click="onCopyRequest()"
+        @mouseleave="hideTooltip"
+      >
+        <span class="icon">
+          <i class="mdi mdi-24px mdi-clipboard-text"></i>
+        </span>
+      </b-button>
+    </b-tooltip>
+  </div>
+</template>
+
+
+<style lang="scss" scoped>
 .badge-cell {
   display: flex;
   justify-content: space-between;
