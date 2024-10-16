@@ -2,19 +2,9 @@
 
 const api = require('lambda-api')();
 
-const generateBadge = require('./src/gen-badge');
-const { CACHE_MAX_AGE, BADGE_TYPES, BADGE_STYLES } = require('./src/constants.json');
-
-const FunctionShield = require('@puresec/function-shield');
-FunctionShield.configure({
-  policy: {
-    outbound_connectivity: 'allow',
-    read_write_tmp: 'block',
-    create_child_process: 'block',
-    read_handler: 'block'
-  },
-  token: process.env.FUNCTION_SHIELD_TOKEN
-});
+const fetchDevpostTitle = require('./src/lib/fetch-devpost-title');
+const generateBadge = require('./src/lib/gen-badge');
+const { CACHE_MAX_AGE, BADGE_TYPES, BADGE_STYLES } = require('./constants.json');
 
 api.use((req, res, next) => {
   res.cors();
@@ -55,12 +45,12 @@ api.get('/get-badge', (req, res) => {
     );
 });
 
-api.get('/get-badge-table', (req, res) => {
+
+api.get('/get-badge-table', async (req, res) => {
   console.log(req.query);
-  console.log(`hasName? ${!!req.query.name}`);
   console.log(`hasId? ${!!req.query.id}`);
 
-  const { name, id } = req.query;
+  const name = await fetchDevpostTitle(req.query.id);
 
   const badges = {};
   const errors = {};
@@ -68,10 +58,11 @@ api.get('/get-badge-table', (req, res) => {
   for (const type of BADGE_TYPES) {
     for (const style of BADGE_STYLES) {
       const config = `${type}/${style}`;
+
       try {
         badges[config] = generateBadge({
           projectName: name,
-          projectId: id,
+          projectId: req.query.id,
           badgeType: type,
           badgeStyle: style,
           unique: true
@@ -80,6 +71,7 @@ api.get('/get-badge-table', (req, res) => {
         const errMsg = err.message;
         if (!errors[errMsg])
           errors[errMsg] = [];
+
         errors[errMsg].push(config);
         badges[config] = '<p>Badge not available!</p>';
       }
@@ -98,7 +90,11 @@ api.get('/get-badge-table', (req, res) => {
 
   return res
     .cache(CACHE_MAX_AGE)
-    .json(badges);
+    .json({
+      projectId: req.query.id,
+      projectName: name,
+      badges: badges,
+    });
 });
 
 api.use((err, req, res, next) => {

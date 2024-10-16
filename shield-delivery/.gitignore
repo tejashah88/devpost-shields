@@ -77,3 +77,6 @@ typings/
 
 #DynamoDB Local files
 .dynamodb/
+
+# Generated deployment files
+aws-lambda.zip

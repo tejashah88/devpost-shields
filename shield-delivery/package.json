@@ -4,22 +4,19 @@
   "description": "A serverless function that serves individual badges for use in GitHub repos.",
   "main": "index.js",
   "scripts": {
-    "offline": "sls offline --dontPrintOutput",
-    "package": "sls package",
-    "deploy": "sls deploy",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "node package.js"
   },
   "keywords": [],
   "author": "Tejas Shah <tejashah88@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@puresec/function-shield": "^1.2.2",
-    "gh-badges": "^2.1.0",
-    "lambda-api": "^0.9.2"
+    "axios": "^1.7.7",
+    "gh-badges": "^2.2.2",
+    "lambda-api": "^1.1.0"
   },
   "devDependencies": {
-    "eslint": "^5.10.0",
-    "serverless-domain-manager": "^2.6.8",
-    "serverless-offline": "^3.31.3"
+    "archiver": "^7.0.1",
+    "eslint": "^9.12.0"
   }
 }

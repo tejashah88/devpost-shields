@@ -4,15 +4,12 @@ const fs = require('fs');
 
 function getLogo(file, base64) {
   return new Promise((resolve, reject) => {
-    fs.readFile(
-      file,
-      (err, buf) => {
-        if (err)
-          return reject(err);
+    fs.readFile(file, (err, buf) => {
+      if (err)
+        return reject(err);
 
-        return resolve(base64 ? buf.toString('base64') : buf);
-      }
-    );
+      return resolve(base64 ? buf.toString('base64') : buf);
+    });
   });
 }
 

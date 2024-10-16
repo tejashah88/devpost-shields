@@ -1,4 +1,5 @@
 {
+  "DEVPOST_PROJECT_BASE_URL": "https://devpost.com/software",
   "CACHE_MAX_AGE": 31536000000,
   "LOGO_FILES": {
     "SMALL": "./assets/devpost-small-logo-shrunk.png",

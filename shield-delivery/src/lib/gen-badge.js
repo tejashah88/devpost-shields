@@ -7,7 +7,7 @@ const bf = new BadgeFactory();
 
 const { getLogoSync } = require('./get-logo');
 
-const { LOGO_FILES, DEVPOST_THEME, BADGE_TYPES, BADGE_STYLES } = require('./constants.json');
+const { LOGO_FILES, DEVPOST_THEME, BADGE_TYPES, BADGE_STYLES } = require('../../constants.json');
 
 const errors = {
   MISSING_PARAMS: 'You must specify the project name, badge type and badge style in order to generate a valid badge.',
