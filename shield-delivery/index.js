@@ -2,7 +2,6 @@
 
 const api = require('lambda-api')();
 
-const fetchDevpostTitle = require('./src/lib/fetch-devpost-title');
 const generateBadge = require('./src/lib/gen-badge');
 const { CACHE_MAX_AGE, BADGE_TYPES, BADGE_STYLES } = require('./constants.json');
 
@@ -48,9 +47,10 @@ api.get('/get-badge', (req, res) => {
 
 api.get('/get-badge-table', async (req, res) => {
   console.log(req.query);
+  console.log(`hasName? ${!!req.query.name}`);
   console.log(`hasId? ${!!req.query.id}`);
 
-  const name = await fetchDevpostTitle(req.query.id);
+  const { name, id } = req.query;
 
   const badges = {};
   const errors = {};
@@ -62,7 +62,7 @@ api.get('/get-badge-table', async (req, res) => {
       try {
         badges[config] = generateBadge({
           projectName: name,
-          projectId: req.query.id,
+          projectId: id,
           badgeType: type,
           badgeStyle: style,
           unique: true
