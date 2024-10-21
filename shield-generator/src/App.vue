@@ -42,7 +42,7 @@
     }))
   );
 
-  async function updateBadgeTable(link: string) {
+  async function updateBadgeTable(name: string, link: string) {
     // clear the error slate
     currentError.value = '';
     processing.value = true;
@@ -53,7 +53,7 @@
         throw new Error(`Invalid link provided! The link should be in the form "${PROJECT_BASE_URL}/<project-id>"`);
 
       const projectId = link.split(PROJECT_BASE_URL)[1];
-      const { data: badgeTableData } = await axios(`${BASE_URL}/get-badge-table?&id=${projectId}`);
+      const { data: badgeTableData } = await axios(`${BASE_URL}/get-badge-table?&id=${projectId}&name=${name}`);
       apiData.value = badgeTableData;
     } catch (err: unknown) {
       if (typeof err === "string") {
@@ -71,16 +71,12 @@
 <template>
   <div id="app">
     <Introduction></Introduction>
-
     <br>
-
-    <div class="columns">
-      <div class="column is-three-fifths is-offset-one-fifth">
+    <div class="columns is-centered">
+      <div class="column is-three-quarters">
         <ProjectSearchBar :loading="processing" @request-table-update=updateBadgeTable></ProjectSearchBar>
         <BadgeTableOptions :BADGE_TYPES="BADGE_TYPES_MAPPED" :BADGE_STYLES="BADGE_STYLES_MAPPED"></BadgeTableOptions>
-
         <br>
-
         <ErrorBox :error="currentError" @reset-error="currentError = ''"></ErrorBox>
       </div>
     </div>
@@ -99,6 +95,6 @@
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+
 }
 </style>

@@ -35,80 +35,26 @@
 </script>
 
 <template>
-  <div>
-    <!-- <div class="columns">
-      <div class="column is-half">
-        <b-checkbox-button
-          v-for="type in BADGE_TYPES"
-          :key="type.internal"
-          v-model="type.hidden"
-          :disabled="numTypesShown <= 1 && !type.hidden"
-          ref="typeCheckboxBtn">
-          {{ type.readable }}
-        </b-checkbox-button>
-      </div>
-    </div>
+  <div class="columns">
+    <b-checkbox-button v-for="type in BADGE_TYPES"
+      class="column is-2"
+      :key="type.internal"
+      v-model="type.hidden"
+      :disabled="numTypesShown <= 1 && !type.hidden"
+      ref="typeCheckboxBtn">
+      {{ type.readable }}
+    </b-checkbox-button>
+  </div>
 
-    <div class="columns">
-      <div class="column is-half">
-        <b-checkbox-button
-          v-for="style in BADGE_STYLES"
-          :key=style.internal
-          v-model="style.hidden"
-          :disabled="numStylesShown <= 1 && !style.hidden"
-          ref="styleCheckboxBtn">
-          {{ style.readable }}
-        </b-checkbox-button>
-      </div>
-    </div> -->
-
-    <!-- VERY GOOD -->
-    <div class="columns">
-      <b-checkbox-button
-        v-for="type in BADGE_TYPES"
-        class="column"
-        :key="type.internal"
-        v-model="type.hidden"
-        :disabled="numTypesShown <= 1 && !type.hidden"
-        ref="typeCheckboxBtn">
-        {{ type.readable }}
-      </b-checkbox-button>
-    </div>
-
-    <div class="columns">
-      <b-checkbox-button
-        v-for="style in BADGE_STYLES"
-        class="column"
-        :key=style.internal
-        v-model="style.hidden"
-        :disabled="numStylesShown <= 1 && !style.hidden"
-        ref="styleCheckboxBtn">
-        {{ style.readable }}
-      </b-checkbox-button>
-    </div>
-    <!-- END OF VERY GOOD -->
-
-    <!-- <div class="buttons">
-      <b-checkbox-button
-        v-for="type in BADGE_TYPES"
-        :key="type.internal"
-        v-model="type.hidden"
-        :disabled="numTypesShown <= 1 && !type.hidden"
-        ref="typeCheckboxBtn">
-        {{ type.readable }}
-      </b-checkbox-button>
-    </div>
-
-    <div class="buttons">
-      <b-checkbox-button
-        v-for="style in BADGE_STYLES"
-        :key=style.internal
-        v-model="style.hidden"
-        :disabled="numStylesShown <= 1 && !style.hidden"
-        ref="styleCheckboxBtn">
-        {{ style.readable }}
-      </b-checkbox-button>
-    </div> -->
+  <div class="columns">
+    <b-checkbox-button v-for="style in BADGE_STYLES"
+      class="column is-2"
+      :key=style.internal
+      v-model="style.hidden"
+      :disabled="numStylesShown <= 1 && !style.hidden"
+      ref="styleCheckboxBtn">
+      {{ style.readable }}
+    </b-checkbox-button>
   </div>
 </template>
 
