@@ -23,7 +23,8 @@ import { ref, type Ref } from 'vue';
           icon=""
           v-model.trim="projectName"
           expanded
-          :loading="props.loading">
+          :loading="props.loading"
+          @keyup.enter="emit('request-table-update', projectName, projectLink)">
         </b-input>
       </b-field>
     </div>
@@ -35,7 +36,8 @@ import { ref, type Ref } from 'vue';
           icon=""
           v-model.trim="projectLink"
           expanded
-          :loading="props.loading">
+          :loading="props.loading"
+          @keyup.enter="emit('request-table-update', projectName, projectLink)">
         </b-input>
       </b-field>
     </div>
